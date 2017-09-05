@@ -36,7 +36,7 @@ function [ dataCubesWithMetaData ] = autoExtractMetaInformationFromDicomHeaders(
         
         for index=1:length(info)
             phInfo=info{index};
-            dataCubeWithMetaData.SeriesDescription{index}=phInfo.SeriesDescription;
+            dataCubeWithMetaData.SeriesDescription{index}=getDicomHeaderInfo(phInfo,'SeriesDescription');
             dataCubeWithMetaData.SeriesNumber(index)=phInfo.SeriesNumber;
             dataCubeWithMetaData.SeriesTime{index}=phInfo.SeriesTime;
             

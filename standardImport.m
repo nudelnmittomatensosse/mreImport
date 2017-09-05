@@ -1,9 +1,5 @@
-function [mreCubes otherMagnitudeCubes otherComplexCubes]=standardImport(patName)
+function [mreCubes otherMagnitudeCubes otherComplexCubes]=standardImport(inputPath,outputPath)
 
-%import mre_import.*;
-rootPath='/mnt/Data/Data_Florian/data/';
-inputPath=fullfile(rootPath,patName,'raw_dicom_files');
-outputPath=fullfile(rootPath,patName,'data_analysis');
 
 %% create image series
 display('Creating image series...');
@@ -20,6 +16,7 @@ display('Converting image series to dataCubes...');
 tic;
 [ dataCubes] = convertAllImageSeriesToDataCubes( imageSeries );
 toc;
+% save(fullfile(outputPath,'dataCubes.mat'),'dataCubes');
 
 clear imageSeries;
 
@@ -64,19 +61,11 @@ selector=false(size(complexCubes));
 for index=1:numel(complexCubes)
     if ~isempty(complexCubes(index).mreInfo)
         mreInfo=complexCubes(index).mreInfo;
-        selector(index)=mreInfo.nTimesSteps>=8 && mreInfo.nDirs>=3;
+        selector(index)=mreInfo.nTimeSteps>=3 && mreInfo.nDirs==3;
     end
 end
 mreCubes=complexCubes(selector);
 otherComplexCubes=complexCubes(~selector);
-
-%% select concat complex cubes along the frequency dimension
-% freqDimension=6;
-% [ concatMreCubes{1} ] = mre_import.concatComplexCubes( mreCubes(1:4),freqDimension);
-% [ concatMreCubes{2} ] = concatComplexCubes( mreCubes(5:8),freqDimension);
-% mreCubes=concatMreCubes;
-% clear concatMreCubes;
-
 
 %% Transform 3D wave fields into image coordinate system
 

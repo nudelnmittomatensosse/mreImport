@@ -3,12 +3,12 @@ function [ complexCubeWithMreInfo ] = autoExtractMreInfoFromMreDataCube( complex
 %   Detailed explanation goes here
 
 mreInfo.nSlices=size(complexCube.cube,3);
-mreInfo.nTimesSteps=size(complexCube.cube,4);
+mreInfo.nTimeSteps=size(complexCube.cube,4);
 mreInfo.nDirs=size(complexCube.cube,5);
 mreInfo.nFreqs=size(complexCube.cube,6);
 mreInfo.nSess=size(complexCube.cube,7);
 
-si=[mreInfo.nSlices mreInfo.nTimesSteps mreInfo.nDirs mreInfo.nFreqs mreInfo.nSess];
+si=[mreInfo.nSlices mreInfo.nTimeSteps mreInfo.nDirs mreInfo.nFreqs mreInfo.nSess];
 
 
 infos=complexCube.ImageInfo;

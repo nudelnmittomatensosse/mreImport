@@ -189,7 +189,11 @@ end
 
 
     function seriesDescription=getSeriesDescription(dicomInfo)
-        seriesDescription=dicomInfo.SeriesDescription;
+        if isfield(dicomInfo,'SeriesDescription')
+            seriesDescription=dicomInfo.SeriesDescription;
+        else
+            seriesDescription='';
+        end
     end
 
     function studyDescription=getStudyDescription(dicomInfo)
